@@ -1,15 +1,17 @@
 
-			/*user can review any film with a comment and 'like' it via the radio button*/
-			$filmId = $_POST['film_id'];
-			$name = $_POST['name'];
-			$comment = $_POST['comment'];
-			$liked=$_POST['liked'];
+				/*exception is caught and error message is shown if the review was not submitted successfully*/
+					catch(Exception $e)
+							{
+								echo("<p>Your review was not submitted. Please enter your name and a valid comment.</p>");
+								echo("<p>".$e->getMessage()."</p>");
+							}
+							$filmId = $_POST['film_id'];
+				echo("<a class='btn btn-default' href='film.php?id=".$filmId."'><p>Back to view Films to Rent</p></a>");
 			
-			/*reviews that customers make update the film, liked, comment and reviewer fields in the back-end database*/
-			$reviews = $db->query("INSERT INTO `comp2203-cw-1415`.review (film_id, liked, comment, reviewer) VALUES ('$filmId', '$liked', '$comment', '$name')");	
-				
-				/*review confirmation message*/
-				echo("<strong>Thank you for submitting a review.</strong>");
-				
-			}	
-					
+				?>	
+</pre>
+
+</div><!-- end of ontent -->
+
+<!-- require footer -->
+<?php require('includes/footer.php'); ?>
