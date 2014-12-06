@@ -1,21 +1,15 @@
-<!-- customer reviews -->
-<div class="container">
 
-<!-- require database, header, review class and film class-->
-<?php require("includes/db.php");?>
-<?php require('includes/header.php'); ?>
-<?php require('classes/review.class.php');?>
-<?php require('classes/film.class.php');?>
-
-<pre>
-	<?php
-		/*try-catch block ensures the reviews that are submitted are valid 
-		*if invalid names and comments are entered, i.e. numbers, exceptions are thrown with appropriate error messages.
-		*@return string
-		*/	
-	try
-		{	
-			if(!isset($_POST['name']) OR empty($_POST['name']) OR is_numeric($_POST['name'])) throw new Exception('Error! Please enter a valid name');
-			if(!isset($_POST['comment']) OR empty($_POST['comment']) OR is_numeric($_POST['comment'])) throw new Exception('Error! Please enter a valid comment');
-				
+			/*user can review any film with a comment and 'like' it via the radio button*/
+			$filmId = $_POST['film_id'];
+			$name = $_POST['name'];
+			$comment = $_POST['comment'];
+			$liked=$_POST['liked'];
 			
+			/*reviews that customers make update the film, liked, comment and reviewer fields in the back-end database*/
+			$reviews = $db->query("INSERT INTO `comp2203-cw-1415`.review (film_id, liked, comment, reviewer) VALUES ('$filmId', '$liked', '$comment', '$name')");	
+				
+				/*review confirmation message*/
+				echo("<strong>Thank you for submitting a review.</strong>");
+				
+			}	
+					
