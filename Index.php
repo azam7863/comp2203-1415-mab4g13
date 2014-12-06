@@ -1,16 +1,22 @@
-			<!-- carousel showing the 5 most recent film dvd releases -->
-			<div class="row">
-				<div class="col-md-7">
-					<div class="padding"><h4><b>Now on DVD!</b></h4></div>
-						<div id="carousel-example-generic" data-ride="carousel">
-						
-						<ol class="carousel-indicators">
-							<li data-target='#carousel-example-generic' data-slide-to='0' class='active'></li>
-							<li data-target='#carousel-example-generic' data-slide-to='1'></li>
-							<li data-target='#carousel-example-generic' data-slide-to='2'></li>
-							<li data-target='#carousel-example-generic' data-slide-to='3'></li>
-							<li data-target='#carousel-example-generic' data-slide-to='4'></li>
-						</ol>
-						<div class='carousel-inner'> 
-
-						<?php
+			/**
+							* extrapolates 5 most recent dvd releases (order by date of release) from film table in database 
+							* @param filmOb Object $fiveRelease
+							* @print img
+							*/	
+							$recent = new filmtable;
+							$fiveRelease = $recent = $db->query("SELECT * FROM `comp2203-cw-1415`.film ORDER BY dvdRelease ASC LIMIT 5");
+							$count = 0;
+							
+								while ($filmOb = $fiveRelease->fetch_object("filmtable"))
+								{
+									if($count == 0) 
+									{	
+										$active = "active";
+									}
+										else
+										{
+											$active = "";
+										}
+									
+									echo("<div class='item $active carousel_Img_Size'>");	
+									echo("<a href='film.php?id=".$filmOb->id."'>");
